@@ -33,6 +33,18 @@ public class MemberRepository {
 		return sql.selectOne("Member.findById", m_number);
 	}
 
+	public void delte(long m_number) {
+		sql.delete("Member.delete", m_number);
+	}
+
+	public void update(MemberDTO member) {
+		sql.update("Member.update", member);
+	}
+
+	public String idDuplicate(String m_id) {
+		return sql.selectOne("Member.idDuplicate", m_id);
+	}
+
 	
 
 }

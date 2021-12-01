@@ -16,5 +16,9 @@
 	${member.m_phone}
 	<br>
 	<a href="findAll">목록으로 돌아가기</a>
+    <!-- http://localhost:8081/member/detail?m_number=2 --> 
+	<a href="/">홈(/)</a> <!-- http://localhost:8081/ 최상위로 올라감-->
+	<a href="./">홈(./)</a><!-- http://localhost:8081/member 한 수준 위로 올라감 -->
+	<a href="../">홈(../)</a><!-- http://localhost:8081/ 상위 수준으로 올라감-->
 </body>
 </html>

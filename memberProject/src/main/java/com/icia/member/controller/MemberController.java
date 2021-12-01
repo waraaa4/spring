@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.icia.member.dto.MemberDTO;
 import com.icia.member.service.MemberService;
@@ -78,9 +79,52 @@ public class MemberController {
 		return "detail";
 	}
 	
-	
-	
+	// 원하는 회원 삭제
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String delete(@RequestParam("m_number") long m_number) {
+		ms.delete(m_number);
+		return "redirect:/findAll";
+	}
 
+	// 원하는 회원 수정하는 페이지 이동
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String updateForm(@RequestParam("m_number") long m_number, Model model) {
+		MemberDTO member = ms.findById(m_number);
+		model.addAttribute("member", member);
+		return "update";
+	}
+	
+	// 회원수정을 완료하고 그 회원을 detail 페이지에 출력
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(@ModelAttribute MemberDTO member, Model model) {
+		ms.update(member);
+		// DB에서 데이터를 가지고 와서 detail.jsp로
+//		member = ms.findById(member.getM_number());
+//		model.addAttribute("member", member);
+//		return "detail";
+		// 컨트롤러의 detail로 주소 요청
+		return "redirect:/detail?m_number="+member.getM_number();
+	}
+	
+	// 아이디 중복체크
+	// @ResponseBody 해당 .jsp를 띄우는게 아니라 화면에 String 이 그대로 출력
+	@RequestMapping(value = "/idDuplicate", method = RequestMethod.POST)
+	public @ResponseBody String idDuplicate(@RequestParam("m_id") String m_id) {
+		System.out.println("MemberController.idDuplicate(): " + m_id);
+		String result = ms.idDuplicate(m_id);
+		return result; // "ok" or "no"
+	}
+	
+	// ajax로 원하는 아이디 조회
+	@RequestMapping(value = "detailAjax", method = RequestMethod.POST)
+	public @ResponseBody MemberDTO detailAjax(@RequestParam("m_number") long m_number) {
+		MemberDTO member = ms.findById(m_number);
+		return member;
+	}
+	
+	
+	
+	
 	
 	
 }
