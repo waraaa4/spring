@@ -2,32 +2,34 @@ package com.icia.board.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.icia.board.dto.BoardDTO;
-import com.icia.board.repository.BoardRepository;
+import com.icia.board.dto.PageDTO;
 
-@Service
-public class BoardService {
+public interface BoardService {
 	
-	@Autowired
-	private BoardRepository br;
+	// interface
+	// 추상메서드를 가짐. => 실행블록은 없고 메서드 선언부만 있는 것
+	// interface를 구현(implements)하는 구현 클래스에서 실행블록을 작성함.
 	
-	@Autowired
-	private HttpSession session;
+	public void save(BoardDTO board);
 
-	public int insert(BoardDTO board) {
-		int result = br.insert(board);
-		return result;
-	}
+	public List<BoardDTO> findAll();
+	
+	public void hits(long b_number);
 
-	public List<BoardDTO> findAll() {
-		List<BoardDTO> boardList = br.findAll();
-		return boardList;
-	}
+	public BoardDTO findById(long b_number);
+
+	public void delete(long b_number);
+
+	public void update(BoardDTO board);
+
+	public List<BoardDTO> pagingList(int page);
+
+	public PageDTO paging(int page);
+
+	public List<BoardDTO> search(String searchtype, String keyword);
+
+	
 
 	
 	

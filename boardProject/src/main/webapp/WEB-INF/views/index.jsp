@@ -7,9 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<h2>index.jsp</h2>
-	<a href="insertForm">글쓰기</a>
+	<a href="/board/save">글쓰기</a>
 	<br>
-	<a href="findAll">글목록</a>
+	<a href="/board/findAll">글목록</a>
+	<br>
+	<a href="/board/paging">페이징</a>
+	
 </body>
 </html>
