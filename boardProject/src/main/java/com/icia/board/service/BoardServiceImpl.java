@@ -1,11 +1,14 @@
 package com.icia.board.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.icia.board.dto.BoardDTO;
 import com.icia.board.dto.PageDTO;
@@ -20,7 +23,6 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void save(BoardDTO board) {
 		br.save(board);
-	
 	}
 
 	@Override
@@ -102,6 +104,31 @@ public class BoardServiceImpl implements BoardService{
 		serchParam.put("word", keyword);
 		List<BoardDTO> boardList = br.search(serchParam);
 		return boardList;
+	}
+
+	@Override
+	public void saveFile(BoardDTO board) throws IllegalStateException, IOException {
+		// dto에 담긴 파일을 가져옴 
+		MultipartFile b_file = board.getB_file();
+		// 파일 이름을 가져옴(파일이름을 DB에 저장하기 위해)
+		String b_filename = b_file.getOriginalFilename();
+		// 파일명 중복을 피하기 위해 파일이름앞에 현재 시간값을 붙임. 
+		b_filename = System.currentTimeMillis() + "-" + b_filename;
+		System.out.println("b_filename: " + b_filename);
+		// 파일 저장 경로 세팅
+		String savePath = "C:\\development\\source\\spring\\boardProject\\src\\main\\webapp\\resources\\upload\\"+b_filename;
+		// bfile이 비어있지 않다면(즉 파일이 있으면) savePath에 저장을 하겠다.
+		// 실제 저장하는 코드
+		if(!b_file.isEmpty()) {
+			b_file.transferTo(new File(savePath));
+		}
+		// 여기까지의 내용은 파일을 저장하는 과정 
+		
+		// DB에 저장하기 위해 dto에 파일이름을 담는다.
+		board.setB_filename(b_filename);
+		
+		// DB의 board_table에 파일이름을 저장할 b_filename 이라는 컬럼 추가(타입은 varchar(100))
+		br.saveFile(board);
 	}
 
 	

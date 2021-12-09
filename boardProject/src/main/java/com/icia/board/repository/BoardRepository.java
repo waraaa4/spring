@@ -54,6 +54,10 @@ public class BoardRepository {
 	public List<BoardDTO> search(Map<String, String> serchParam) {
 		return sql.selectList("Board.search", serchParam);
 	}
+
+	public void saveFile(BoardDTO board) {
+		sql.insert("Board.saveFile", board);
+	}
 	
 	
 	

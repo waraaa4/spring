@@ -9,6 +9,11 @@
  			values(#{b_writer},#{b_password},#{b_title},#{b_contents},now())
  	</insert>
  	
+ 	<insert id="saveFile" parameterType="board">
+ 		insert into board_table(b_writer,b_password,b_title,b_contents,b_date,b_filename)
+ 			values(#{b_writer},#{b_password},#{b_title},#{b_contents},now(),#{b_filename})
+ 	</insert>
+ 	
  	<select id="findAll" resultType="board">
  		select * from board_table
  	</select>
@@ -62,6 +67,8 @@
 			</when>
 		</choose>
 	</sql>
+	
+	
 	
   </mapper>
  

@@ -1,5 +1,6 @@
 package com.icia.board.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.icia.board.dto.BoardDTO;
@@ -28,6 +29,8 @@ public interface BoardService {
 	public PageDTO paging(int page);
 
 	public List<BoardDTO> search(String searchtype, String keyword);
+
+	public void saveFile(BoardDTO board) throws IllegalStateException, IOException;
 
 	
 

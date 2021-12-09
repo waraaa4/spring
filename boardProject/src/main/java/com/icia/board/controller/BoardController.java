@@ -1,5 +1,6 @@
 package com.icia.board.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.icia.board.dto.BoardDTO;
+import com.icia.board.dto.CommentDTO;
 import com.icia.board.dto.PageDTO;
 import com.icia.board.service.BoardService;
+import com.icia.board.service.CommentService;
 
 // /board/* 주소를 모두 처리
 @Controller
@@ -21,6 +24,9 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService bs;
+	
+	@Autowired
+	private CommentService cs;
 	
 	// 글작성 페이지로 이동
 	@RequestMapping(value = "save", method = RequestMethod.GET)
@@ -33,7 +39,14 @@ public class BoardController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(@ModelAttribute BoardDTO board) {
 		bs.save(board);
-		return "redirect:/board/findAll";
+		return "redirect:/board/paging";
+	}
+	
+	// 파일 저장
+	@RequestMapping(value = "/savefile", method = RequestMethod.POST)
+	public String saveFile(@ModelAttribute BoardDTO board) throws IllegalStateException, IOException {
+		bs.saveFile(board);
+		return "redirect:/board/paging";
 	}
 	
 	// 게시글 목록 조회
@@ -51,6 +64,8 @@ public class BoardController {
 		BoardDTO board = bs.findById(b_number);
 		model.addAttribute("board", board);
 		model.addAttribute("page", page); //detail.jsp로 갈 때 page값을 가지고감.
+		List<CommentDTO> commentList = cs.findAll(b_number);
+		model.addAttribute("commentList", commentList);
 		return "board/detail";
 	}
 	
