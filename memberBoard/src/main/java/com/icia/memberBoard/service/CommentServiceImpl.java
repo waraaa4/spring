@@ -23,6 +23,5 @@ public class CommentServiceImpl implements CommentService{
 	public void save(CommentDTO comment) {
 		cr.save(comment);
 	}
-	
-	
+		
 }

@@ -26,12 +26,5 @@ public interface BoardService {
 	public void update(BoardDTO board);
 
 	public void delete(long b_number);
-
-
-
-
-
-	
-
 	
 }

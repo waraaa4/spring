@@ -26,8 +26,6 @@
 			alert('비밀번호가 틀립니다.')
 		}
 	}
-	
-
 </script>
 </head>
 <body>

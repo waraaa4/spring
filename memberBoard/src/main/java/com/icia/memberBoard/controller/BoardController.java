@@ -61,11 +61,10 @@ public class BoardController {
 	
 	// 선택한 게시글 조회
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
-	public String findById(@RequestParam("b_number") long b_number, Model model, @RequestParam(value="page", required=false, defaultValue="1")int page) {
+	public String findById(@RequestParam("b_number") long b_number, Model model) {
 		bs.hits(b_number);
 		BoardDTO board = bs.findById(b_number);
 		model.addAttribute("board", board);
-		model.addAttribute("page", page);
 		List<CommentDTO> commentList = cs.findAll(b_number);
 		model.addAttribute("commentList", commentList);
 		return "board/detail";
@@ -73,19 +72,17 @@ public class BoardController {
 	
 	// 게시글 수정하는 페이지 이동
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public String updateForm(@RequestParam("b_number") long b_number, Model model, @RequestParam(value="page", required=false, defaultValue="1")int page) {
+	public String updateForm(@RequestParam("b_number") long b_number, Model model) {
 		BoardDTO board = bs.findById(b_number);
 		model.addAttribute("board", board);
-		model.addAttribute("page", page);
 		return "board/update";
 	}
 	
 	// 게시글 수정완료 하고 detail 페이지에 출력
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(@ModelAttribute BoardDTO board, Model model, @RequestParam(value="page", required=false, defaultValue="1")int page) {
+	public String update(@ModelAttribute BoardDTO board) {
 		bs.update(board);
-		System.out.println(board.getB_number()+"asd");
-		return "redirect:/board/detail?b_number="+board.getB_number() + "&page=" + page;
+		return "redirect:/board/detail?b_number="+board.getB_number();
 	}
 	
 	// 게시글 삭제
@@ -94,11 +91,5 @@ public class BoardController {
 		bs.delete(b_number);
 		return "redirect:/board/findAll";
 	}
-	
-	
-	
-	
-	
-	
 	
 }

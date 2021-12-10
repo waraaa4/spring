@@ -56,7 +56,7 @@ public class MemberController {
 	
 	// 로그인할때 아이디, 비번이 일치하는지 확인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@ModelAttribute MemberDTO member,Model model) {
+	public String login(@ModelAttribute MemberDTO member) {
 		String resultPage = ms.login(member);
 		return resultPage;
 	}

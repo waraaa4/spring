@@ -64,9 +64,5 @@ public class BoardRepository {
 	public void delete(long b_number) {
 		sql.delete("Board.delete", b_number);
 	}
-
-
-
-	
 	
 }

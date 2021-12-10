@@ -22,12 +22,12 @@
 	</ul>
 	<c:if test="${sessionScope.loginId eq board.b_writer}">
 		<a href="/board/delete?b_number=${board.b_number}">삭제</a>
-		<a href="/board/update?b_number=${board.b_number}&page=${page}">수정</a>
+		<a href="/board/update?b_number=${board.b_number}">수정</a>
 	</c:if>
 	<c:if test="${sessionScope.loginId eq 'admin'}">
 		<a href="/board/delete?b_number=${board.b_number}">삭제</a>
 	</c:if>
-	<a href="/board/findAll?page=${page}">목록</a>
+	<a href="/board/findAll">목록</a>
 	
 	<div id="comment-write">
 		<input type="text" id="c_writer" value="${sessionScope.loginId}" readonly="readonly">

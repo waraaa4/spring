@@ -102,8 +102,6 @@ public class BoardServiceImpl implements BoardService {
 	// 아이디 찾기
 	@Override
 	public BoardDTO findById(long b_number) {
-		// 1.조회수증가 2.상세조회
-		br.hits(b_number);
 		return br.findById(b_number);
 	}
 	
@@ -124,7 +122,5 @@ public class BoardServiceImpl implements BoardService {
 	public void delete(long b_number) {
 		br.delete(b_number);
 	}
-
-	
 
 }

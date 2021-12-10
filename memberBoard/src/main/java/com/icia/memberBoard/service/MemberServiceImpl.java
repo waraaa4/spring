@@ -100,12 +100,4 @@ public class MemberServiceImpl implements MemberService {
 		mr.update(member);
 	}
 
-
-
-	
-
-
-	
-
-
 }

@@ -25,6 +25,5 @@
 	<c:if test="${sessionScope.loginId eq 'admin'}">
 		<a href="/member/adminPage">관리자 페이지</a> 
 	</c:if>
-	
 </body>
 </html>

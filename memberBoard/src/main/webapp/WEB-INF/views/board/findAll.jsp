@@ -42,13 +42,12 @@
 				<th>조회수</th>
 			</tr>
 		</thead>
-		<!-- 제목을 클릭했을 때 해당 글의 상세페이지 출력. 조회수도 하나 올라가야함. -->
 		<c:forEach items="${boardList}" var="board">
 			<tbody>
 				<tr>
 					<td>${board.b_number}</td>
 					<td>${board.b_writer}</td>
-					<td><a href="/board/detail?b_number=${board.b_number}&page${paging.page}">${board.b_title}</a></td>
+					<td><a href="/board/detail?b_number=${board.b_number}">${board.b_title}</a></td>
 					<td>${board.b_date}</td>
 					<td>${board.b_hits}</td>
 				</tr>

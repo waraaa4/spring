@@ -8,11 +8,9 @@
 </head>
 <body>
 	<h2>index.jsp</h2>
-	
 	<ul>
 		<li><a href="/member/save">회원가입</a></li>
 		<li><a href="/member/login">로그인</a></li>
 	</ul>
-	
 </body>
 </html>

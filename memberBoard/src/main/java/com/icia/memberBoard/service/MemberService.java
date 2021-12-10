@@ -21,10 +21,4 @@ public interface MemberService {
 
 	void update(MemberDTO member);
 
-
-
-
-
-	
-
 }
